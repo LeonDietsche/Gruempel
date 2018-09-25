@@ -9,6 +9,7 @@ namespace GruempelLeonRemo
 {
     class PersonsInDB ///Person
     {
+        
         public void PersonEinlesen()
         {
             SqlConnection con;
@@ -21,8 +22,7 @@ namespace GruempelLeonRemo
             int zip;
             string city;
             string addressID = string.Empty;
-            string Eingabe;                
-            string teamID;
+           
 
             try
             {
@@ -49,12 +49,13 @@ namespace GruempelLeonRemo
                 Console.WriteLine("\n Enter Your ZIP");
                 ///Eingabe = Console.ReadLine();
                 ///double EingabeZah
+                
 
                 zip = int.Parse(Console.ReadLine());
 
                 Console.WriteLine("\n Enter Your City");
                 city = Console.ReadLine();
-
+                
                 string query1 = "INSERT INTO ADDRESS (STREET, HOUSENUMBER, ZIP, CITY) VALUES ('" + street + "', '" + housenumber + "'," + zip + ", '" + city + "'); SELECT SCOPE_IDENTITY();";
                 SqlCommand ins1 = new SqlCommand(query1, con);
                 int ID = Convert.ToInt32(ins1.ExecuteScalar());
@@ -78,6 +79,37 @@ namespace GruempelLeonRemo
                 Console.WriteLine(x.Message);
             }
             Console.ReadLine();
+
+
         }
+        public void PersonenAusgeben()
+        {
+            SqlConnection con;
+            string str;
+
+            str = @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = GruempelDB; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False;";
+            con = new SqlConnection(str);
+            con.Open();
+
+            string q = "SELECT * FROM PLAYER INNER JOIN ADDRESS ON PLAYER.ID_ADDRESS = ADDRESS.ID";
+            
+            SqlCommand view = new SqlCommand(q, con);
+
+            SqlDataReader dr = view.ExecuteReader();
+            while (dr.Read())
+            {
+                
+                Console.WriteLine("Vorname :" + dr.GetValue(1).ToString());
+                Console.WriteLine("Nachname :" + dr.GetValue(2).ToString());
+                Console.WriteLine("Telefonnummer :" + dr.GetValue(3).ToString());
+                Console.WriteLine("Strasse :" + dr.GetValue(5).ToString());
+                Console.WriteLine("------------");
+                Console.ReadKey();
+            }
+            
+
+
+        }
+
     }
 }
