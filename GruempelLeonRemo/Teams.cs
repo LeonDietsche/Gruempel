@@ -11,7 +11,7 @@ namespace GruempelLeonRemo
     {
         public void spielerhinzufuegen()
         {
-
+            string query = "SELECT FROM TEAMS ID";
         }
         public void TeamEinlesen()
         {

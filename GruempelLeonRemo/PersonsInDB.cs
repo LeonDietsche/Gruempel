@@ -82,6 +82,37 @@ namespace GruempelLeonRemo
 
 
         }
+        public void ClearTable()
+        {
+            SqlConnection con;
+            string str;
+
+            str = @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = GruempelDB; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False;";
+            con = new SqlConnection(str);
+            con.Open();  
+
+            string sqlTrunc = "TRUNCATE TABLE PLAYER";
+            SqlCommand cmd = new SqlCommand(sqlTrunc, con);
+            cmd.ExecuteNonQuery();
+            con.Close();
+                     Console.ReadKey();
+        }
+        public void ClearTableAddress()
+        {
+            SqlConnection con;
+            string str;
+
+            str = @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = GruempelDB; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False;";
+            con = new SqlConnection(str);
+            con.Open();
+
+            string sqlTrunc = "TRUNCATE TABLE ADDRESS";
+            SqlCommand cmd = new SqlCommand(sqlTrunc, con);
+            cmd.ExecuteNonQuery();
+            con.Close();
+            Console.ReadKey();
+        }
+
         public void PersonenAusgeben()
         {
             SqlConnection con;
@@ -103,13 +134,14 @@ namespace GruempelLeonRemo
                 Console.WriteLine("Nachname :" + dr.GetValue(2).ToString());
                 Console.WriteLine("Telefonnummer :" + dr.GetValue(3).ToString());
                 Console.WriteLine("Strasse :" + dr.GetValue(5).ToString());
-                Console.WriteLine("------------");
+                
                 Console.ReadKey();
             }
-            
+            con.Close();
 
 
         }
 
+       
     }
 }
