@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GruempelLeonRemo
 {
-    class PersonsInDB
+    class PersonsInDB ///Person
     {
         public void PersonEinlesen()
         {
