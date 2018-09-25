@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[ADDRESS] (
+    [ID]          INT           IDENTITY (1, 1) NOT NULL,
+    [STREET]      VARCHAR (128) NULL,
+    [HOUSENUMBER] VARCHAR (128) NULL,
+    [ZIP]         INT NULL,
+    [CITY]        VARCHAR (128) NULL,
+    PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+
