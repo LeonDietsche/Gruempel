@@ -21,18 +21,20 @@ namespace GruempelLeonRemo
             int zip;
             string city;
             string addressID = string.Empty;
-            
+            string Eingabe;                
             string teamID;
 
             try
             {
 
-                str = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\diets\source\repos\GruempelLeonRemo\GruempelLeonRemo\Database1.mdf;Integrated Security=True";
+                str = @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = GruempelDB; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False;";
                 con = new SqlConnection(str);
                 con.Open();
+
                 Console.WriteLine("Database connected");
                 Console.WriteLine("\n Enter Your Vorname");
                 vorname = Console.ReadLine();
+
                 Console.WriteLine("\n Enter Your Nachname");
                 nachname = Console.ReadLine();
                 Console.WriteLine("\n Enter Your Telefonnummer");
@@ -45,44 +47,30 @@ namespace GruempelLeonRemo
                 housenumber = Console.ReadLine();
 
                 Console.WriteLine("\n Enter Your ZIP");
+                ///Eingabe = Console.ReadLine();
+                ///double EingabeZah
+
                 zip = int.Parse(Console.ReadLine());
 
                 Console.WriteLine("\n Enter Your City");
                 city = Console.ReadLine();
 
-                string query1 = "INSERT INTO ADDRESS (STREET, HOUSENUMBER, ZIP, CITY) VALUES ('" + street + "', '" + housenumber + "'," + zip + ", '" + city + "' )";
+                string query1 = "INSERT INTO ADDRESS (STREET, HOUSENUMBER, ZIP, CITY) VALUES ('" + street + "', '" + housenumber + "'," + zip + ", '" + city + "'); SELECT SCOPE_IDENTITY();";
                 SqlCommand ins1 = new SqlCommand(query1, con);
-                ///ins1.ExecuteNonQuery();
-                
-                SqlDataReader dr1 = ins1.ExecuteReader();
-                while (dr1.Read())
-                {
-                    addressID = dr1.GetValue(0).ToString();
-                    Console.WriteLine("\n Street :" + dr1.GetValue(1).ToString());
-                    Console.WriteLine("\n Housenumber :" + dr1.GetValue(2).ToString());
-                    Console.WriteLine("\n ZIP :" + dr1.GetValue(3).ToString());
-                    Console.WriteLine("\n City :" + dr1.GetValue(4).ToString());
+                int ID = Convert.ToInt32(ins1.ExecuteScalar());
+               
 
-
-                }
-                dr1.Close();
-
-                string query = "INSERT INTO PLAYER (VORNAME, NACHNAME,TELEFONNUMMER, ID_ADDRESS) VALUES ('" + vorname + "', '" + nachname + "', '" + telefonnummer + "' , '" + addressID + "')";
+                string query = "INSERT INTO PLAYER (VORNAME, NACHNAME,TELEFONNUMMER, ID_ADDRESS) VALUES ('" + vorname + "', '" + nachname + "', '" + telefonnummer + "' , " + ID + " )";
                 SqlCommand ins = new SqlCommand(query, con);
                 ins.ExecuteNonQuery();
+
                 Console.WriteLine("\n Data stored into Database");
-                string q = "SELECT * FROM PLAYER";
+                string q = "SELECT * FROM PLAYER INNER JOIN ADDRESS ON PLAYER.ID_ADDRESS = ADDRESS.ID";
                 SqlCommand view = new SqlCommand(q, con);
                 SqlDataReader dr = view.ExecuteReader();
-                while (dr.Read())
-                {
-                    Console.WriteLine("\n Vorname :" + dr.GetValue(1).ToString());
-                    Console.WriteLine("\n Nachname :" + dr.GetValue(2).ToString());
-                    Console.WriteLine("\n Telefonnummer :" + dr.GetValue(3).ToString());
+                
 
-                }
 
-               
                 con.Close();
             }
             catch (SqlException x)
