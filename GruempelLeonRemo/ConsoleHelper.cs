@@ -12,5 +12,19 @@ namespace GruempelLeonRemo
         {
             Console.WriteLine("------------------");
         }
+
+        public static int ReadNumber()
+        {
+            while (true)
+            {
+                var value = Console.ReadLine();
+                int res = 0;
+                if(int.TryParse(value, out res))
+                {
+                    return res;
+                }
+                Console.WriteLine("Bitte gültige Zahl eingeben");
+            }
+        }
     }
 }

@@ -41,7 +41,7 @@ namespace GruempelLeonRemo
             Console.ReadLine();
         }
 
-        public void SpielerTeamZuweisen(Spieler spieler, Team team)
+        public void SpielerTeamZuweisen(Player spieler, Team team)
         {
             var query = @"UPDATE dbo.PLAYER
                         SET ID_TEAMS = @teamID

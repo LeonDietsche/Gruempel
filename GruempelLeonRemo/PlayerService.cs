@@ -13,7 +13,6 @@ namespace GruempelLeonRemo
         public void PersonEinlesen()
         {
             SqlConnection con;
-            string str;
             string nachname;
             string vorname;
             string telefonnummer;
@@ -78,7 +77,7 @@ namespace GruempelLeonRemo
         }
         
 
-        public List<Spieler> LoadAllPlayers()
+        public List<Player> LoadAllPlayers()
         {
             var con = ConnectionFactory.GetConnection();
 
@@ -87,12 +86,20 @@ namespace GruempelLeonRemo
 
 
             SqlCommand view = new SqlCommand(q, con);
-
+            con.Open();
             SqlDataReader dr = view.ExecuteReader();
-            var playerList = new List<Spieler>();
+            var playerList = MapPlayerToList(dr);
+            con.Close();
+            return playerList;
+
+        }
+
+        private List<Player> MapPlayerToList(SqlDataReader dr)
+        {
+            var playerList = new List<Player>();
             while (dr.Read())
             {
-                var player = new Spieler
+                var player = new Player
                 {
                     ID = (int)dr.GetValue(0),
                     Vorname = (string)dr.GetValue(1),
@@ -108,22 +115,29 @@ namespace GruempelLeonRemo
 
                 };
                 playerList.Add(player);
-                //Console.WriteLine("ID: " + dr.GetValue(0));
-                //Console.WriteLine("Vorname: " + dr.GetValue(1).ToString());
-                //Console.WriteLine("Nachname: " + dr.GetValue(2).ToString());
-                //Console.WriteLine("Telefonnummer: " + dr.GetValue(3).ToString());
-                //Console.WriteLine("Strasse: " + dr.GetValue(4).ToString());
-                //Console.WriteLine("HausNr: " + dr.GetValue(5).ToString());
-                //Console.WriteLine("PLZ: " + dr.GetValue(6).ToString());
-                //Console.WriteLine("Ort: " + dr.GetValue(7).ToString());
-                //ConsoleHelper.PrintSeperator();
-
             }
-            con.Close();
             return playerList;
-
         }
 
+        public List<Player> PersonSuchen()
+            
+        {
+            Console.WriteLine("Welchen Spieler suchen sie");
+            string Eingabe = Console.ReadLine();
+            var con = ConnectionFactory.GetConnection();
+
+            string q = $@"SELECT P.ID, P.VORNAME, P.NACHNAME, P.TELEFONNUMMER, A.STREET, A.HOUSENUMBER, A.ZIP, A.CITY 
+                        FROM PLAYER AS P INNER JOIN ADDRESS AS A ON P.ID_ADDRESS = A.ID
+                        WHERE NACHNAME LIKE '%{Eingabe}%' OR VORNAME LIKE '%{Eingabe}%'";
+            var command = new SqlCommand(q, con);
+
+            //command.Parameters.AddWithValue("@searchValue", Eingabe);
+            con.Open();
+            var dr = command.ExecuteReader();
+            var playerList = MapPlayerToList(dr);
+            con.Close();
+            return playerList;
+        }
 
         public void PersonenAusgeben()
         {

@@ -20,10 +20,8 @@ namespace GruempelLeonRemo
 
         internal void Print()
         {
-            Console.WriteLine($"Strasse: {Strasse}");
-            Console.WriteLine($"HausNr: {HausNr}");
-            Console.WriteLine($"PLZ: {PLZ}");
-            Console.WriteLine($"Ort: {Ort}");
+            Console.WriteLine($"Strasse: {Strasse}\tHausNr: {HausNr}\tPLZ: {PLZ}\tOrt: {Ort}");
+            
         }
 
         

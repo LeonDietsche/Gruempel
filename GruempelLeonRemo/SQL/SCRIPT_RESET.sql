@@ -1,4 +1,6 @@
-﻿DROP TABLE IF EXISTS [dbo].[PLAYER];
+﻿use GruempelDB;
+
+DROP TABLE IF EXISTS [dbo].[PLAYER];
 DROP TABLE IF EXISTS [dbo].[ADDRESS];
 DROP TABLE IF EXISTS [dbo].[TEAMS];
 
@@ -13,9 +15,9 @@ CREATE TABLE [dbo].[ADDRESS] (
 );
 
 CREATE TABLE [dbo].[TEAMS] (
-    [ID]     INT        NOT NULL,
-    [NAME]   NCHAR (10) NULL,
-    [PUNKTE] NCHAR (10) NULL,
+    [ID]     INT	IDENTITY (1, 1)        NOT NULL,
+    [NAME]   VARCHAR (128) NULL,
+    [PUNKTE] INT  NULL,
     PRIMARY KEY CLUSTERED ([ID] ASC)
 );
 

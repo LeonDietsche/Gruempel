@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GruempelLeonRemo
 {
-    public class Spieler
+    public class Player
     {
         public int ID { get; set; }
         public string Nachname { get; set; }
@@ -17,14 +17,10 @@ namespace GruempelLeonRemo
 
         public void Print()
         {
-            Console.WriteLine($"ID: {ID}");
-            Console.WriteLine($"Vorname: {Vorname}");
-            Console.WriteLine($"Nachname: {Nachname}");
-            Console.WriteLine($"Telefonnummer: {Telefonnummer}");
-            
-
-
+            Console.WriteLine($"ID: {ID}\tVorname: {Vorname}\tNachname: {Nachname}\tTelefonnummer: {Telefonnummer}");
+                     
             Address.Print();
+
         }
     }
 }

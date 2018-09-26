@@ -15,6 +15,8 @@ namespace GruempelLeonRemo
         internal void Print()
         {
             Console.WriteLine($"ID: {ID}\tName: {Name}\tPunkte: {Punkte}");
+            ConsoleHelper.PrintSeperator();
+            Console.ReadKey();
         }
     }
 
