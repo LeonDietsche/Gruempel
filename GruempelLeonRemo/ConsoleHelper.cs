@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace GruempelLeonRemo
 {
-    class Person
+    public class ConsoleHelper
     {
-        public int ID { get; set; }
-        public string Nachname { get; set; }
-        public string Vorname { get; set; }
+        public static void PrintSeperator()
+        {
+            Console.WriteLine("------------------");
+        }
     }
 }
-

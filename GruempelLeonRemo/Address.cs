@@ -6,16 +6,26 @@ using System.Threading.Tasks;
 
 namespace GruempelLeonRemo
 {
-    class Address
+    public class Address
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
 
-        public string Street { get; set; }
+        public string Strasse { get; set; }
 
-        public string HouseNr { get; set; }
+        public string HausNr { get; set; }
 
-        public string Zip { get; set; }
+        public string PLZ { get; set; }
 
-        public string City { get; set; }
+        public string Ort { get; set; }
+
+        internal void Print()
+        {
+            Console.WriteLine($"Strasse: {Strasse}");
+            Console.WriteLine($"HausNr: {HausNr}");
+            Console.WriteLine($"PLZ: {PLZ}");
+            Console.WriteLine($"Ort: {Ort}");
+        }
+
+        
     }
 }
