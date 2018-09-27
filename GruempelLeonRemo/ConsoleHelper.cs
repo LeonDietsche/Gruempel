@@ -26,5 +26,7 @@ namespace GruempelLeonRemo
                 Console.WriteLine("Bitte gültige Zahl eingeben");
             }
         }
+        
+        
     }
 }

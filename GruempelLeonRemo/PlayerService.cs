@@ -46,7 +46,8 @@ namespace GruempelLeonRemo
 
                 Console.WriteLine("\n Bitte Postleitzahl eingeben");
                 zip = int.Parse(Console.ReadLine());
-
+                
+                
                 Console.WriteLine("\n Bitte Ort eingeben");
                 city = Console.ReadLine();
                 
@@ -60,16 +61,24 @@ namespace GruempelLeonRemo
                 ins.ExecuteNonQuery();
 
                 Console.WriteLine("\n Data stored into Database");
-                string q = "SELECT * FROM PLAYER INNER JOIN ADDRESS ON PLAYER.ID_ADDRESS = ADDRESS.ID";
-                SqlCommand view = new SqlCommand(q, con);
-                SqlDataReader dr = view.ExecuteReader();
+                //string q = "SELECT * FROM PLAYER INNER JOIN ADDRESS ON PLAYER.ID_ADDRESS = ADDRESS.ID";
+                //SqlCommand view = new SqlCommand(q, con);
+                //SqlDataReader dr = view.ExecuteReader();
 
 
                 
             }
             catch (SqlException x)
             {
-                Console.WriteLine(x.Message);
+                //con = ConnectionFactory.GetConnection();
+                //con.Open();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Bei der Eingabe ist ein Fehler unterloffen, Bitte versuchen sie es erneut", x);
+                Console.ForegroundColor = ConsoleColor.White;
+
+                //string querydeletelastrow = "DELETE FROM ADDRESS WHERE ID=(SELECT MAX(ID) FROM ADDRESS)";
+                //SqlCommand ins = new SqlCommand(querydeletelastrow, con);
+                //ins.ExecuteNonQuery();
             }
             Console.ReadLine();
 
@@ -85,18 +94,18 @@ namespace GruempelLeonRemo
                         FROM PLAYER AS P INNER JOIN ADDRESS AS A ON P.ID_ADDRESS = A.ID";
 
 
-            SqlCommand view = new SqlCommand(q, con);
+            SqlCommand view = new SqlCommand(q, con); ///view wird auf aufgabe von query gegeben
             con.Open();
-            SqlDataReader dr = view.ExecuteReader();
+            SqlDataReader dr = view.ExecuteReader(); ///gibt das statement aus
             var playerList = MapPlayerToList(dr);
             con.Close();
             return playerList;
 
         }
 
-        private List<Player> MapPlayerToList(SqlDataReader dr)
-        {
-            var playerList = new List<Player>();
+        private List<Player> MapPlayerToList(SqlDataReader dr) ///hier wird die liste mit Spielern gefüllt bzw. erstellt
+        {                                                      /// gibt auch eine liste zurück
+            var playerList = new List<Player>(); ///player listist eine Liste in der Liste MapPlayerToList
             while (dr.Read())
             {
                 var player = new Player
@@ -122,7 +131,7 @@ namespace GruempelLeonRemo
         public List<Player> PersonSuchen()
             
         {
-            Console.WriteLine("Welchen Spieler suchen sie");
+            Console.WriteLine("Welchen Spieler suchen Sie?");
             string Eingabe = Console.ReadLine();
             var con = ConnectionFactory.GetConnection();
 
@@ -153,11 +162,8 @@ namespace GruempelLeonRemo
 
             
         }
-        //public void TeamZuweisen(Spieler.)
-        //{
-
-        //}
-
+        
+        
        
     }
 }

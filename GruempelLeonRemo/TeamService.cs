@@ -57,7 +57,7 @@ namespace GruempelLeonRemo
             spieler.Team = team;
 
         }
-        public List<Team> LoadAllTeams()
+        public List<Team> LoadAllTeams() ///liste mit allen Team erstellen
         {
             var con = ConnectionFactory.GetConnection();
             var query = "SELECT ID, NAME, PUNKTE FROM TEAMS";
@@ -79,12 +79,14 @@ namespace GruempelLeonRemo
             }
             return teamList;
         }
-        public void TeamAusgeben()
+        public List<Team> LoadPrintTeams() ///Alle Teams ausgeben
         {
             var list = LoadAllTeams();
             foreach(var team in list){
                 team.Print();
             }
+            return list;
+
         }
     }
 
