@@ -37,7 +37,7 @@ namespace GruempelLeonRemo
                 Console.WriteLine();
 
 
-                Console.WriteLine("Was wollen sie machen? Spieler verwalten (1), Teams verwalten (2) Programm beenden(exit)");
+                Console.WriteLine("Was wollen sie machen? Spieler verwalten (1), Teams verwalten (2), Spielplan generieren(3), Programm beenden(exit)");
                 string Auswahl = Console.ReadLine();
                 if (Auswahl == "1")
                 {
@@ -67,7 +67,7 @@ namespace GruempelLeonRemo
                     {
                         var players = SearchPlayer();
                         Console.WriteLine("Choose ID");
-                        
+
                         var id = int.Parse(Console.ReadLine());
                         var player = players.FirstOrDefault(p => p.ID == id);
                         if (player == null)
@@ -75,7 +75,7 @@ namespace GruempelLeonRemo
                             Console.WriteLine("Kein gültiger Spieler eingegeben.");
                             return;
                         }
-                        
+
                         var con = ConnectionFactory.GetConnection();
 
 
@@ -138,7 +138,7 @@ namespace GruempelLeonRemo
                         catch (Exception TeamHatSpieler)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("Team beeinhaltet noch Spieler.",TeamHatSpieler);
+                            Console.WriteLine("Team beeinhaltet noch Spieler.", TeamHatSpieler);
                             Console.ForegroundColor = ConsoleColor.White;
 
 
@@ -153,7 +153,7 @@ namespace GruempelLeonRemo
                         var id = int.Parse(Console.ReadLine()); //Player, welcher diese ID hat wird ausgewählt
                         var player = players.FirstOrDefault(p => p.ID == id);
 
-                        if(player == null)
+                        if (player == null)
                         {
                             Console.WriteLine("Kein gültiger Spieler eingegeben.");
                             return;
@@ -167,7 +167,7 @@ namespace GruempelLeonRemo
                         var teamID = int.Parse(Console.ReadLine()); //Team, welches diese ID hat wird ausgewählt
 
                         var team = teams.FirstOrDefault(t => t.ID == teamID);
-                        
+
 
                         service.SpielerTeamZuweisen(player, team); ///wird zu Team hinzugefügt
 
@@ -179,6 +179,11 @@ namespace GruempelLeonRemo
                         Console.ForegroundColor = ConsoleColor.White;
                     }
 
+                }
+                else if (Auswahl == "3")
+                {
+                    var spielplan = new SpielplanCreator();
+                    spielplan.SpielplanAusgabe();
                 }
                 else if (Auswahl == "exit")
                 {
