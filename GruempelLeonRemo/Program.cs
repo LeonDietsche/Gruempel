@@ -103,12 +103,13 @@ namespace GruempelLeonRemo
                 else if (Auswahl == "2")
                 {
                     Console.WriteLine("Teamverwaltung:");
-                    Console.WriteLine("Möchten sie ein Team erstellen(1), alle Teams anzeigen(2), eins löschen(3) oder einen Spieler zuweisen(4)?");
-                    var teamService = new TeamService();
+                    Console.WriteLine("Team erstellen(1), alle Teams anzeigen(2), eins löschen(3), einen Spieler zuweisen(4)?");
+                    var teamService = new TeamService(); ///team service instanz der Klasse TeamService wird instanziert
                     string AuswahlTeam = Console.ReadLine();
                     if (AuswahlTeam == "1")
                     {
                         teamService.TeamEinlesen();
+                        Console.WriteLine("Team erstellt.");
                     }
 
                     else if (AuswahlTeam == "2")
@@ -171,7 +172,14 @@ namespace GruempelLeonRemo
 
                         service.SpielerTeamZuweisen(player, team); ///wird zu Team hinzugefügt
 
+                        Console.WriteLine("Spieler wurde dem Team zugewiesen.");
+
+
                     }
+                    ////else if (AuswahlTeam == "5")
+                    ////{
+                    ////    teamService.PunkteHinzufügen();
+                    ////}
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.Red;

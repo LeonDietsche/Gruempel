@@ -24,13 +24,13 @@ namespace GruempelLeonRemo
                 
 
                 Console.WriteLine("\n Enter Your Teamname");
-                name = Console.ReadLine();
+                name = Console.ReadLine(); ///einlesen und abspeichern in der variable name
 
-                string query = "INSERT INTO TEAMS (NAME, PUNKTE) VALUES ('" + name + "', " + 0 + " )";
-                SqlCommand insTeam = new SqlCommand(query, con);
+                string query = "INSERT INTO TEAMS (NAME, PUNKTE) VALUES ('" + name + "', " + 0 + " )"; ///query/abfrage in variable gespeichert.
+                SqlCommand insTeam = new SqlCommand(query, con); ///SqlCommand (insteam) wird erstelllt mit der die query von Oben erfüllt und die Verbindung zur DB hat.
 
                 con.Open();
-                insTeam.ExecuteNonQuery();
+                insTeam.ExecuteNonQuery(); ///insteam wird ausgeführt
 
                 con.Close();
             }
@@ -88,6 +88,22 @@ namespace GruempelLeonRemo
             return list;
 
         }
+        //public void PunkteHinzufügen()
+        //{
+            
+        //    var teams = LoadPrintTeams();
+        //    Console.WriteLine("Welchem Team wollen Sie Punkte hinzufügen?");
+            
+
+        //    var PunkteEingabe = int.Parse(Console.ReadLine()); //Team, welches diese ID hat wird ausgewählt
+
+        //    var punkte = teams.FirstOrDefault(t => t.ID == PunkteEingabe); ///Gibt erstes Element zurück welches die Bedingung erfüllt
+
+        //    Console.WriteLine("Anzahl Punkte Gewonnen (2), Gleichstand(1), Verloren(0)");
+        //    string Punkte = Console.ReadLine();
+        //    string querypunkte = "INSERT INTO PUNKTE FROM TEAMS WHERE ID = punkte VALUES(" + Punkte + ")";
+        /// UPdate sript not insert
+        //}
     }
 
 }
